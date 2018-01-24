@@ -1,0 +1,28 @@
+<!--index.wxml-->
+<!-- <view class="model-alert">
+  <text>添加成功，在购物车等亲~</text>
+</view> -->
+<view wx:for="{{list}}" wx:for-index="index" wx-for-item="item" wx:key="{{list.id}}" wx:if="{{list_show}}" class="lists">
+  <image class='pic' src='{{item.img}}'></image>
+  <text class='goods_name'>{{item.name}}</text>
+  <text class='price'>￥{{item.price}}</text>
+  <button bindtap='add' data-goodsData="{{item}}" class='addBtn iconfont icon-gouwuche'></button>
+</view>
+<view wx:for="{{shopping_cart_list}}" wx:for-index="index" wx-for-item="item" wx:key="{{shopping_cart_list.id}}" wx:if="{{!list_show}}" class="shopping_list">
+  <text>goods name：</text>
+  <text class='goods_name'>{{item.name}}\n</text>
+  <text>goods number：</text>
+  <button class='decrease' bindtap='decrease' data-id="{{item.id}}">-</button>
+  <input class='num' value='{{item.num}}' bindinput="change_num" data-id="{{item.id}}" type='number'></input>
+  <button class='increase' bindtap='increase' data-id="{{item.id}}">+</button>
+  <text>\n</text>
+  <text>price：</text>
+  <text class='price'>{{item.price}}\n</text>
+  <text>total price：</text>
+  <text class='total_price'>{{item.price * item.num}}</text>
+  <button bindtap='del' data-id="{{index}}">delect</button>
+</view>
+<view class='bottom_nav'>
+  <button bindtap='show_goods'>goods</button>
+  <button bindtap='show_shopping_cart'>shopping cart</button>
+</view>
