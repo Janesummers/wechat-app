@@ -1,0 +1,36 @@
+<!--index.wxml-->
+<!-- <view class="model-alert">
+  <text>添加成功，在购物车等亲~</text>
+</view> -->
+<view wx:for="{{list}}" wx:for-index="index" wx-for-item="item" wx:key="{{list.id}}" wx:if="{{list_show}}" class="lists">
+  <image class='pic' src='{{item.img}}'></image>
+  <text class='goods_name'>{{item.name}}</text>
+  <text class='price'>￥{{item.price}}</text>
+  <button bindtap='add' data-goodsData="{{item}}" class='addBtn iconfont icon-gouwuche'></button>
+</view>
+<checkbox-group bindchange="choose_goods" class="shopping_list" wx:if="{{!list_show}}">
+  <view wx:for="{{shopping_cart_list}}" wx:for-index="index" wx-for-item="item" wx:key="{{shopping_cart_list.id}}">
+    <checkbox value="{{item.id}}" checked='{{item.checked}}' bindtap='choose' data-id="{{item.id}}"></checkbox>
+    <text class='goods_name'>{{item.name}}\n</text>
+    <button class='decrease' bindtap='decrease' data-id="{{item.id}}">-</button>
+    <input class='num' value='{{item.num}}' bindinput="change_num" data-id="{{item.id}}" type='number'></input>
+    <button class='increase' bindtap='increase' data-id="{{item.id}}">+</button>
+    <text>\n</text>
+    <text class='price'>{{item.price}}\n</text>
+    <text class='total_price'>{{item.total_price}}</text>
+    <button bindtap='del' data-id="{{index}}">delect</button>
+  </view>
+</checkbox-group>
+<view class='settlement_box' wx:if="{{!list_show}}">
+  <checkbox-group bindchange="all_choose" class='all_choose'>
+    <label class="checkbox">
+      <checkbox value="" checked="{{choose_all}}"/>全选
+    </label>
+  </checkbox-group>
+  <button class='settlement_btn'>结算({{all_num}})</button>
+  <text class='total'>合计：<text class='num'>￥{{total_price}}</text></text>
+</view>
+<view class='bottom_nav'>
+  <button bindtap='show_goods'>goods</button>
+  <button bindtap='show_shopping_cart'>shopping cart</button>
+</view>
