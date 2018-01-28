@@ -1,9 +1,0 @@
-.model-alert{
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 15px;
-    color: #fff;
-    background: rgba(0,0,0,0.7);
-}
