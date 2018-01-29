@@ -1,0 +1,45 @@
+<!--index.wxml-->
+<!-- <view class="model-alert">
+  <text>添加成功，在购物车等亲~</text>
+</view> -->
+<view wx:for="{{list}}" wx:for-index="index" wx-for-item="item" wx:key="{{list.id}}" wx:if="{{list_show}}" class="lists">
+  <image class='pic' src='{{item.img}}'></image>
+  <text class='goods_name'>{{item.name}}</text>
+  <text class='price'>￥{{item.price}}</text>
+  <button bindtap='add' data-goodsData="{{item}}" class='addBtn iconfont icon-gouwuche'></button>
+</view>
+<checkbox-group bindchange="choose_goods" class="shopping_list" wx:if="{{!list_show}}">
+  <view wx:for="{{shopping_cart_list}}" wx:for-index="index" wx-for-item="item" wx:key="{{shopping_cart_list.id}}" class='items'>
+    <checkbox value="{{item.id}}" checked='{{item.checked}}' bindtap='choose' data-id="{{item.id}}"></checkbox>
+    <image class='imgs' src='{{item.img}}'></image>
+    <text class='goods_name' wx:if="{{!item.editing}}">{{item.name}}</text>
+    <button bindtap='edit' data-id="{{item.id}}" class='iconfont icon-bianji edit' wx:if="{{!item.editing}}"></button>
+    <view class='num_box' wx:if="{{item.editing}}">
+      <button class='decrease' bindtap='decrease' data-id="{{item.id}}">-</button>
+      <input class='num' value='{{item.num}}' bindinput="change_num" data-id="{{item.id}}" type='number'></input>
+      <button class='increase' bindtap='increase' data-id="{{item.id}}">+</button>
+    </view>
+    <text class='price_and_num' wx:if="{{!item.editing}}">
+      <text class="price">￥{{item.price}}</text>
+      <text class='goods_num'>× {{item.num}}</text>
+    </text>
+    <view class='options' wx:if="{{item.editing}}">
+    <button bindtap='done' data-id="{{item.id}}" class='done'>完成</button>
+      <button bindtap='del' data-id="{{index}}" class='del'>删除</button>
+    </view>
+  </view>
+</checkbox-group>
+<view class='settlement_box' wx:if="{{!list_show && shopping_cart_list.length!==0}}">
+  <checkbox-group bindchange="all_choose" class='all_choose'>
+    <label class="checkbox">
+      <checkbox value="" checked="{{choose_all}}"/>全选
+    </label>
+  </checkbox-group>
+  <button class='settlement_btn {{all_num !== 0 ? "active" : ""}}'>结算({{all_num}})</button>
+  <text class='total'>合计：<text class='num'>￥{{total_price}}</text></text>
+</view>
+<text wx:if="{{!list_show && shopping_cart_list.length===0}}" class="shopping_clear">购物车空空如也</text>
+<view class='bottom_nav'>
+  <button bindtap='show_goods'>goods</button>
+  <button bindtap='show_shopping_cart'>shopping cart</button>
+</view>
